@@ -2,14 +2,14 @@ import pandas as pd
 import numpy as np
 from rapidfuzz import fuzz
 
-# Încarcă fișierul Parquet
+# Încarc fișierul Parquet
 df = pd.read_parquet("veridion_product_deduplication_challenge.snappy.parquet")
 
-# Afișează primele 5 rânduri
+# Afișez primele 5 rânduri
 print("\n📦 Primele produse din dataset:")
 print(df.head())
 
-# Afișează toate coloanele disponibile
+# Afișez toate coloanele disponibile
 print("\n🧠 Coloane disponibile:")
 print(df.columns)
 
@@ -31,10 +31,10 @@ for i, row in df.iterrows():
 
     title = row["title_clean"]
 
-    # PROGRES VIZIBIL
+    # Progres pas cu pas
     print(f"🔎 Compar {i+1}/{len(df)}", end="\r")
 
-    # Optimizare: nu mai comparăm cu toate, ci doar cu titluri care încep cu aceeași literă
+    # Optimizare: nu mai comparăm cu toate, ci doar cu titluri care încep cu aceeași literă (am avut probleme cu codul si dura prea mult)
     matches = df[df.index != i].copy()
     matches = matches[matches["title_clean"].str[0:1] == title[0:1]]
 
